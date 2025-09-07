@@ -8,10 +8,6 @@ DROP DATABASE IF EXISTS "DataWarehouse";
 -- Create a new database
 CREATE DATABASE "DataWarehouse";
 
--- Connect to the newly created database
-\c "DataWarehouse"
-
-
 -- ===============================
 -- Step 2️⃣: Create Schemas
 -- ===============================
