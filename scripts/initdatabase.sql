@@ -2,7 +2,7 @@
 -- Step 1️⃣: Create Database
 -- ===============================
 
--- Önce postgres DB’ye bağlı ol
+-- First, connect to the postgres DB
 \c postgres
 
 -- Drop the database if it already exists
@@ -11,7 +11,7 @@ DROP DATABASE IF EXISTS "DataWarehouse";
 -- Create a new database
 CREATE DATABASE "DataWarehouse";
 
--- Bağlan DataWarehouse DB'ye
+-- Connect to the DataWarehouse DB
 \c "DataWarehouse"
 
 -- ===============================
@@ -29,3 +29,4 @@ CREATE SCHEMA silver;
 -- Bronze schema: for raw, unprocessed data
 DROP SCHEMA IF EXISTS bronze CASCADE;
 CREATE SCHEMA bronze;
+
