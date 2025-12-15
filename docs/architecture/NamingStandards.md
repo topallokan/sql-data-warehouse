@@ -171,13 +171,12 @@ ix_dim_customer_customer_id
 ```
 
 ---
-
 ## 9. Constraints
 
 | Type | Pattern |
-|-----|--------|
-| Primary Key | pk_<table> |
-| Foreign Key | fk_<table>_<ref_table> |
+|------|---------|
+| Primary Key | `pk_<table_name>` |
+| Foreign Key | `fk_<table_name>_<ref_table_name>` |
 
 ---
 
@@ -185,12 +184,10 @@ ix_dim_customer_customer_id
 
 SQL and pipeline files must follow numeric ordering:
 
-```
-00_create_schemas.sql
-01_create_tables.sql
-02_load_staging.sql
-03_transform_silver.sql
-```
+- `00_create_schemas.sql`
+- `01_create_tables.sql`
+- `02_load_staging.sql`
+- `03_transform_silver.sql`
 
 ---
 
@@ -202,4 +199,5 @@ SQL and pipeline files must follow numeric ordering:
 
 ---
 
-Status: Approved
+**Status:** Approved
+
