@@ -175,7 +175,7 @@ ix_dim_customer_customer_id
 ## 9. Constraints
 
 | Type | Pattern |
-|----|--------|
+|-----|--------|
 | Primary Key | pk_<table> |
 | Foreign Key | fk_<table>_<ref_table> |
 
@@ -184,6 +184,7 @@ ix_dim_customer_customer_id
 ## 10. File Naming
 
 SQL and pipeline files must follow numeric ordering:
+
 ```
 00_create_schemas.sql
 01_create_tables.sql
@@ -194,6 +195,7 @@ SQL and pipeline files must follow numeric ordering:
 ---
 
 ## 11. Enforcement
+
 - All new objects must follow this standard  
 - Violations must be corrected before merge  
 - Exceptions require documentation  
