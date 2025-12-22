@@ -4,14 +4,23 @@
 USE AdventureWorks_STG;
 GO
 
--- Raw landing zone for source data
-IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'raw')
-    EXEC('CREATE SCHEMA raw');
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'Sales')
+    EXEC('CREATE SCHEMA Sales');
 GO
 
--- Load audit and control metadata
-IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'audit')
-    EXEC('CREATE SCHEMA audit');
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'Person')
+    EXEC('CREATE SCHEMA Person');
+GO
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'Production')
+    EXEC('CREATE SCHEMA Production');
+
+GO
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'Etl')
+    EXEC('CREATE SCHEMA Etl');
 GO
 
 USE AdventureWorks_DWH;
@@ -35,4 +44,10 @@ GO
 -- Data quality objects
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'dq')
     EXEC('CREATE SCHEMA dq');
+GO
+
+GO
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'Etl')
+    EXEC('CREATE SCHEMA Etl');
 GO
