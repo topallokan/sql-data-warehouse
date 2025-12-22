@@ -46,7 +46,6 @@ IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'dq')
     EXEC('CREATE SCHEMA dq');
 GO
 
-GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'Etl')
     EXEC('CREATE SCHEMA Etl');
