@@ -55,28 +55,28 @@ The solution follows a layered warehouse architecture:
 ## 📂 Repository Structure
 
 config/
-├── mappings/         # Mapping files between source and DWH
-├── environments/     # Environment-specific configs
-└── dq_rules/         # Data quality rules and definitions
+├── mappings/         🗺️  # Mapping files between source and DWH
+├── environments/     ⚙️  # Environment-specific configs
+└── dq_rules/         ✅  # Data quality rules and definitions
 
 docs/
-├── architecture/     # ERDs, star schema diagrams
-├── modeling/         # Dimensional modeling docs
-└── dq_reports/       # Data profiling and quality reports
+├── architecture/     🏗️  # ERDs, star schema diagrams
+├── modeling/         📐  # Dimensional modeling docs
+└── dq_reports/       📊  # Data profiling and quality reports
 
 src/
-├── infrastructure/   # Database & schema setup scripts
-├── oltp_exploration/ # Source system analysis & profiling
+├── infrastructure/   🛠️  # Database & schema setup scripts
+├── oltp_exploration/ 🔍  # Source system analysis & profiling
 ├── staging/
-│   ├── extract/      # OLTP source extraction logic
-│   └── load/         # Staging table definitions and load scripts
+│   ├── extract/      ⬇️  # OLTP source extraction logic
+│   └── load/         ⬆️  # Staging table definitions and load scripts
 ├── dwh/
-│   ├── bronze/       # Minimally transformed raw data
-│   ├── silver/       # Cleaned, standardized, conformed data
-│   └── gold/         # Dimensional models (facts & dimensions)
-├── dq/               # Data quality stored procedures / checks
-├── pipelines/        # Orchestration placeholders (ADF / Airflow)
-└── test/             # Validation, unit, integration, regression tests
+│   ├── bronze/       🟫  # Minimally transformed raw data
+│   ├── silver/       🟪  # Cleaned, standardized, conformed data
+│   └── gold/         🟨  # Dimensional models (facts & dimensions)
+├── dq/               ✅  # Data quality stored procedures / checks
+├── pipelines/        🔄  # Orchestration placeholders (ADF / Airflow)
+└── test/             🧪  # Validation, unit, integration, regression tests
 
 README.md
 
