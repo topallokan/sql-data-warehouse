@@ -57,94 +57,89 @@ The solution follows a layered warehouse architecture:
 ## 📂 Project Repository
 
 ```text 
-└───sql-data-warehouse
-    │   LICENSE
-    │   README.md
-    │
-    ├───config
-    │       dq_rules.txt
-    │       environments.txt
-    │       mappings.txt
-    │       settings.txt
-    │       tables.txt
-    │
-    ├───docs
-    │   ├───architecture
-    │   │       .gitkeep
-    │   │       NamingStandards.md
-    │   │
-    │   ├───dq
-    │   │       .gitkeep
-    │   │       DataQuality_Rules.md
-    │   │       SalesOrderHeader_Profile.md
-    │   │       SalesOrderHeader_Profile.xlsx
-    │   │
-    │   ├───modeling
-    │   │       .gitkeep
-    │   │       dimensions and fact scope.md
-    │   │       Logical_Star_Schema.md
-    │   │
-    │   ├───project-overview
-    │   │       Business_Entities_and_Domains.md
-    │   │
-    │   └───source-analysis
-    │           .gitkeep
-    │           load-strategy.md
-    │           Source System Profiling.pbix
-    │           Source System Profiling.png
-    │
-    ├───src
-    │   ├───dq
-    │   │       .gitkeep
-    │   │       dq.usp_ProfileTable.sql
-    │   │
-    │   ├───dwh
-    │   │   │   .gitkeep
-    │   │   │
-    │   │   ├───bronze
-    │   │   │       .gitkeep
-    │   │   │
-    │   │   ├───gold
-    │   │   │       .gitkeep
-    │   │   │
-    │   │   └───silver
-    │   │           .gitkeep
-    │   │
-    │   ├───etl_jobs
-    │   │       .gitkeep
-    │   │
-    │   ├───infrastructure
-    │   │       00_create_databases.sql
-    │   │       01_create_schemas.sql
-    │   │
-    │   ├───oltp_exploration
-    │   │       .gitkeep
-    │   │       ERD.md
-    │   │       RowCount Growth.sql
-    │   │       Sales_Domain_Mapping.md
-    │   │       Schema_Discovery_Query.sql
-    │   │       top_15_table_sizes.sql
-    │   │
-    │   ├───pipelines
-    │   │       .gitkeep
-    │   │
-    │   └───staging
-    │       │   .gitkeep
-    │       │
-    │       ├───extract
-    │       │       usp_oltp_extract_salesperson.sql
-    │       │
-    │       └───load
-    │               01 - CREATE TABLE Sales.SalesOrderHeader.sql
-    │               02 - CREATE TABLE Sales.SalesOrderDetail.sql
-    │               03 - CREATE TABLE Sales.Customer.sql
-    │               04 - CREATE TABLE Person.Person.sql
-    │               05 - CREATE TABLE Person.Address.sql
-    │               06 - CREATE TABLE Production.Product.sql
-    │               07 - CREATE TABLE Sales.SalesPerson.sql
-    │
-    └───test
-            .gitkeep 
+│   LICENSE
+│   README.md
+│
+├───config
+│       .gitkeep
+│
+├───docs
+│   ├───architecture
+│   │       .gitkeep
+│   │       NamingStandards.md
+│   │
+│   ├───dq
+│   │       .gitkeep
+│   │       DataQuality_Rules.md
+│   │       SalesOrderHeader_Profile.md
+│   │       SalesOrderHeader_Profile.xlsx
+│   │
+│   ├───modeling
+│   │       .gitkeep
+│   │       dimensions and fact scope.md
+│   │       Logical_Star_Schema.md
+│   │
+│   ├───project-overview
+│   │       Business_Entities_and_Domains.md
+│   │
+│   └───source-analysis
+│           .gitkeep
+│           load-strategy.md
+│           Source System Profiling.pbix
+│           Source System Profiling.png
+│
+├───src
+│   ├───dq
+│   │       .gitkeep
+│   │       dq.usp_ProfileTable.sql
+│   │
+│   ├───dwh
+│   │   │   .gitkeep
+│   │   │
+│   │   ├───bronze
+│   │   │       .gitkeep
+│   │   │
+│   │   ├───gold
+│   │   │       .gitkeep
+│   │   │
+│   │   └───silver
+│   │           .gitkeep
+│   │
+│   ├───etl_jobs
+│   │       .gitkeep
+│   │
+│   ├───infrastructure
+│   │       00_create_databases.sql
+│   │       01_create_schemas.sql
+│   │
+│   ├───oltp_exploration
+│   │       .gitkeep
+│   │       ERD.md
+│   │       RowCount Growth.sql
+│   │       Sales_Domain_Mapping.md
+│   │       Schema_Discovery_Query.sql
+│   │       top_15_table_sizes.sql
+│   │
+│   ├───pipelines
+│   │       .gitkeep
+│   │
+│   └───staging
+│       │   .gitkeep
+│       │
+│       ├───extract
+│       │       usp_oltp_extract_salesperson.sql
+│       │
+│       └───load
+│               01 - CREATE TABLE Sales.SalesOrderHeader.sql
+│               02 - CREATE TABLE Sales.SalesOrderDetail.sql
+│               03 - CREATE TABLE Sales.Customer.sql
+│               04 - CREATE TABLE Person.Person.sql
+│               05 - CREATE TABLE Person.Address.sql
+│               06 - CREATE TABLE Production.Product.sql
+│               07 - CREATE TABLE Sales.SalesPerson.sql
+│
+└───test
+        .gitkeep
 
 ```
 
