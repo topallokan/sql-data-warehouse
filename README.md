@@ -50,10 +50,36 @@ The solution follows a layered warehouse architecture:
 **Constraints:**  
 - Local development environment.  
 - Source system structure cannot be modified.  
-- Scope intentionally focuses on the Sales domain to maintain clarity and depth.  
+- Scope intentionally focuses on the Sales domain to maintain clarity and depth.
 
 ## 📘 Additional Documentation
 
 Detailed step-by-step project planning, design decisions, and implementation notes are maintained in Notion and referenced where applicable.  
 
 **Final Note:** This project is designed to reflect real-world data warehouse development practices, emphasizing clarity, maintainability, and architectural discipline.
+
+## 📂 Project Hierarchy
+
+```text
+.
+├── config/
+│   ├── mappings/          # Source-to-Target mapping documents
+│   ├── environments/      # Env-specific configs (Dev, Test, Prod)
+│   └── dq_rules/          # Data quality rules and business logic definitions
+├── docs/
+│   ├── architecture/      # ERDs and Star Schema diagrams
+│   ├── modeling/          # Dimensional modeling documentation
+│   └── dq_reports/        # Data profiling and quality audit reports
+└── src/
+    ├── infrastructure/    # Database, schema, and role setup scripts
+    ├── oltp_exploration/  # Source system analysis and profiling queries
+    ├── staging/
+    │   ├── extract/       # OLTP source extraction logic
+    │   └── load/          # Staging table definitions and load scripts
+    ├── dwh/
+    │   ├── bronze/        # Raw: Minimally transformed data
+    │   ├── silver/        # Cleansed: Standardized and conformed data
+    │   └── gold/          # Curated: Facts and Dimensions (Star Schema)
+    ├── dq/                # Data quality stored procedures and checks
+    ├── pipelines/         # Orchestration (e.g., ADF, Airflow, or dbt)
+    └── test/              # Unit, integration, and regression tests
