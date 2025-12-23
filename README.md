@@ -54,7 +54,7 @@ The solution follows a layered warehouse architecture:
 
 
 
-## 📂 Project Hierarchy
+## 📂 Project Repository
 
 ```text 
 └───sql-data-warehouse
@@ -139,7 +139,7 @@ The solution follows a layered warehouse architecture:
     │               02 - CREATE TABLE Sales.SalesOrderDetail.sql
     │               03 - CREATE TABLE Sales.Customer.sql
     │               04 - CREATE TABLE Person.Person.sql
-    │               05- CREATE TABLE Person.Address.sql
+    │               05 - CREATE TABLE Person.Address.sql
     │               06 - CREATE TABLE Production.Product.sql
     │               07 - CREATE TABLE Sales.SalesPerson.sql
     │
