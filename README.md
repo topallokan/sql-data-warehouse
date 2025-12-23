@@ -144,9 +144,9 @@ The solution follows a layered warehouse architecture:
     │               07 - CREATE TABLE Sales.SalesPerson.sql
     │
     └───test
-            .gitkeep```
+            .gitkeep 
 
-
+```
 
 ## 📘 Additional Documentation
 
