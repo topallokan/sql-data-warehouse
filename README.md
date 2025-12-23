@@ -78,6 +78,8 @@ The solution follows a layered warehouse architecture:
     ├── pipelines/         # Orchestration (e.g., ADF, Airflow, or dbt)
     └── test/              # Unit, integration, and regression tests
 
+```text
+
 ## 📘 Additional Documentation
 
 Detailed step-by-step project planning, design decisions, and implementation notes are maintained in Notion and referenced where applicable.  
