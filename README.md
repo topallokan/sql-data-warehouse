@@ -52,12 +52,6 @@ The solution follows a layered warehouse architecture:
 - Source system structure cannot be modified.  
 - Scope intentionally focuses on the Sales domain to maintain clarity and depth.
 
-## 📘 Additional Documentation
-
-Detailed step-by-step project planning, design decisions, and implementation notes are maintained in Notion and referenced where applicable.  
-
-**Final Note:** This project is designed to reflect real-world data warehouse development practices, emphasizing clarity, maintainability, and architectural discipline.
-
 ## 📂 Project Hierarchy
 
 ```text
@@ -83,3 +77,11 @@ Detailed step-by-step project planning, design decisions, and implementation not
     ├── dq/                # Data quality stored procedures and checks
     ├── pipelines/         # Orchestration (e.g., ADF, Airflow, or dbt)
     └── test/              # Unit, integration, and regression tests
+
+## 📘 Additional Documentation
+
+Detailed step-by-step project planning, design decisions, and implementation notes are maintained in Notion and referenced where applicable.  
+
+**Final Note:** This project is designed to reflect real-world data warehouse development practices, emphasizing clarity, maintainability, and architectural discipline.
+
+
