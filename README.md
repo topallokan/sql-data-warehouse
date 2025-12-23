@@ -78,7 +78,7 @@ The solution follows a layered warehouse architecture:
     ├── pipelines/         # Orchestration (e.g., ADF, Airflow, or dbt)
     └── test/              # Unit, integration, and regression tests
 
-```text
+text```
 
 ## 📘 Additional Documentation
 
