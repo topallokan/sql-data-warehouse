@@ -1,73 +1,106 @@
-# 📌 Project Foundation
 
-## 🎯 1. Project Vision
-The purpose of this project is to design and implement a scalable, reliable, and analytics-ready Data Warehouse using the AdventureWorks dataset.  
-This solution aims to centralize operational data, enable efficient reporting, and demonstrate best practices in data engineering, ETL/ELT processing, and dimensional modeling.
+# 📌 AdventureWorks Data Warehouse Project
 
-The vision is to build a production-like, portfolio-quality DWH environment that highlights strong architectural thinking and hands-on SQL development skills.
+This project demonstrates the design and implementation of an **end-to-end, production-style Data Warehouse** using the AdventureWorks OLTP dataset.  
 
----
+The goal is to build a **scalable, analytics-ready DWH** that centralizes operational data, enables efficient reporting, and reflects real-world data engineering and dimensional modeling practices.  
 
-## 🏆 2. Success Criteria
-This project will be considered successful when the following measurable outcomes are achieved:
-
-- A fully designed **Dimensional Data Model** (Star Schema) for Sales, Products, Customers, and Geography domains.
-- Automated **ETL/ELT pipelines** that extract, transform, and load data from the OLTP source into the DWH.
-- Clean, conformed, and analytics-ready datasets.
-- A query-optimized warehouse supporting fast aggregations and reporting workloads.
-- Clear documentation including ERDs, pipeline architecture, and folder structure.
-- A fully reproducible setup using SQL scripts and structured version control.
+The project focuses on **architectural clarity, SQL-based ETL development, and clean analytical modeling**, making it suitable as a portfolio-quality implementation.
 
 ---
 
-## 👥 3. Stakeholders & Data Consumers
+# 🎯 Project Objectives
 
-### **Primary Stakeholders**
-- **Business Analysts** – Require accurate, aggregated KPIs for reporting.
-- **Data Engineers** – Own pipeline development and DWH maintenance.
-- **Data Scientists** – Use curated datasets for advanced analytics.
-- **Management & Leadership** – Depend on reliable insights for decisions.
+The project is considered successful when the following outcomes are achieved:
 
-### **Secondary Stakeholders**
-- BI Developers  
-- Reporting Teams  
-- Technical Auditors  
+- A fully defined dimensional data model (**Star Schema**) covering **Sales, Products, Customers, and Geography** domains  
+- Reliable **OLTP → Staging → DWH → Mart** data flow  
+- Clean, conformed, and analytics-ready datasets  
+- Query-optimized warehouse design supporting reporting and aggregations  
+- Clear technical documentation including **ERDs, star schema diagrams, and data lineage**  
+- A fully reproducible setup using **version-controlled SQL scripts**  
 
 ---
 
-## 🛠️ 4. Tooling & Environment Strategy
+# 🏗️ Architecture Overview
 
-### **Development Environment**
-- Microsoft SQL Server (OLTP + DWH)
-- SQL Server Management Studio (SSMS)
-- Azure Data Studio (optional)
+The solution follows a layered warehouse architecture:
 
-### **Version Control**
-- GitHub repository with organized folder structure
-- SQL scripts versioned under a dedicated `/src` directory
+1. **OLTP Source:** AdventureWorks transactional database  
+2. **Staging Layer:** Raw data ingestion with separated extraction and loading logic  
+3. **Data Warehouse (DWH):**  
+   - **Bronze:** Minimally transformed raw data  
+   - **Silver:** Cleaned, standardized, and conformed data  
+   - **Gold:** Dimensional models (facts & dimensions)  
+4. **Data Marts & Analytics:** Business-focused analytical views and Power BI datasets  
 
-### **Data Integration (ETL/ELT)**
-- SQL-based ETL (Stored Procedures, Views, and Batch Jobs)
-- Optional orchestration using Azure Data Factory or Apache Airflow
-
-### **Modeling & Diagrams**
-- dbdiagram.io / Draw.io for ERD and star schema designs
+> Extraction queries are executed on the OLTP source system, but they are owned and versioned under the staging layer as part of the ETL responsibility.
 
 ---
 
-## ⚠️ 5. Constraints & Assumptions
+# 📂 Repository Structure
 
-### **Assumptions**
-- AdventureWorks OLTP database is available and successfully restored.
-- Dimensional modeling will follow Kimball methodology.
-- Data volumes remain moderate and suitable for SQL Server processing.
-- Batch processing (not streaming) is sufficient for project goals.
+\`\`\`text
+config/                
+├─ mappings/                # Mapping files between source and DWH
+├─ environments/            # Environment-specific configs
+└─ dq_rules/                # Data quality rules and definitions
 
-### **Constraints**
-- Limited compute resources (local environment).
-- Source dataset structure cannot be altered.
-- Scope focuses on core Sales domain to maintain feasibility.
-- No real-time or near-real-time ingestion.
+docs/                     
+├─ architecture/            # ERDs, star schema diagrams
+├─ modeling/                # Dimensional modeling docs
+└─ dq_reports/              # Data profiling and quality reports
+
+src/
+├─ infrastructure/          # Database & schema setup scripts
+├─ oltp_exploration/        # Source system analysis & profiling
+├─ staging/
+│  ├─ extract/              # OLTP source extraction logic
+│  └─ load/                 # Staging table definitions and load scripts
+├─ dwh/
+│  ├─ bronze/               # Minimally transformed raw data
+│  ├─ silver/               # Cleaned, standardized, conformed data
+│  └─ gold/                 # Dimensional models (facts & dimensions)
+├─ dq/                      # Data quality stored procedures / checks
+├─ pipelines/               # Orchestration placeholders (ADF / Airflow)
+└─ test/                    # Validation, unit, integration, regression tests
+\`\`\`
 
 ---
 
+# 🛠️ Tooling & Technologies
+
+- **Database:** Microsoft SQL Server  
+- **ETL / ELT:** SQL-based pipelines (Stored Procedures, Views, Batch Jobs)  
+- **Modeling:** Kimball Dimensional Modeling  
+- **BI & Analytics:** Power BI  
+- **Version Control:** Git & GitHub  
+- **Documentation:** Markdown, diagrams, profiling reports  
+
+> Optional orchestration with ADF / Airflow is considered but not mandatory.
+
+---
+
+# ⚠️ Constraints & Assumptions
+
+### Assumptions
+- AdventureWorks OLTP database is available and restored  
+- Batch processing is sufficient (no streaming requirements)  
+- Data volumes remain within SQL Server processing limits  
+
+### Constraints
+- Local development environment  
+- Source system structure cannot be modified  
+- Scope intentionally focuses on the **Sales domain** to maintain clarity and depth
+
+---
+
+# 📘 Additional Documentation
+
+- Detailed step-by-step project planning, design decisions, and implementation notes are maintained in **Notion** and referenced where applicable.
+
+---
+
+# 🔚 Final Note
+
+This project is designed to reflect **real-world data warehouse development practices**, emphasizing **clarity, maintainability, and architectural discipline** rather than over-engineering.
