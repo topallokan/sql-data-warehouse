@@ -57,29 +57,94 @@ The solution follows a layered warehouse architecture:
 ## 📂 Project Hierarchy
 
 ```text 
-.
-├── config/
-│   ├── mappings/          # Source-to-Target mapping documents
-│   ├── environments/      # Env-specific configs (Dev, Test, Prod)
-│   └── dq_rules/          # Data quality rules and business logic definitions
-├── docs/
-│   ├── architecture/      # ERDs and Star Schema diagrams
-│   ├── modeling/          # Dimensional modeling documentation
-│   └── dq_reports/        # Data profiling and quality audit reports
-└── src/
-    ├── infrastructure/    # Database, schema, and role setup scripts
-    ├── oltp_exploration/  # Source system analysis and profiling queries
-    ├── staging/
-    │   ├── extract/       # OLTP source extraction logic
-    │   └── load/          # Staging table definitions and load scripts
-    ├── dwh/
-    │   ├── bronze/        # Raw: Minimally transformed data
-    │   ├── silver/        # Cleansed: Standardized and conformed data
-    │   └── gold/          # Curated: Facts and Dimensions (Star Schema)
-    ├── dq/                # Data quality stored procedures and checks
-    ├── pipelines/         # Orchestration (e.g., ADF, Airflow, or dbt)
-    └── test/              # Unit, integration, and regression tests
-```
+└───sql-data-warehouse
+    │   LICENSE
+    │   README.md
+    │
+    ├───config
+    │       dq_rules.txt
+    │       environments.txt
+    │       mappings.txt
+    │       settings.txt
+    │       tables.txt
+    │
+    ├───docs
+    │   ├───architecture
+    │   │       .gitkeep
+    │   │       NamingStandards.md
+    │   │
+    │   ├───dq
+    │   │       .gitkeep
+    │   │       DataQuality_Rules.md
+    │   │       SalesOrderHeader_Profile.md
+    │   │       SalesOrderHeader_Profile.xlsx
+    │   │
+    │   ├───modeling
+    │   │       .gitkeep
+    │   │       dimensions and fact scope.md
+    │   │       Logical_Star_Schema.md
+    │   │
+    │   ├───project-overview
+    │   │       Business_Entities_and_Domains.md
+    │   │
+    │   └───source-analysis
+    │           .gitkeep
+    │           load-strategy.md
+    │           Source System Profiling.pbix
+    │           Source System Profiling.png
+    │
+    ├───src
+    │   ├───dq
+    │   │       .gitkeep
+    │   │       dq.usp_ProfileTable.sql
+    │   │
+    │   ├───dwh
+    │   │   │   .gitkeep
+    │   │   │
+    │   │   ├───bronze
+    │   │   │       .gitkeep
+    │   │   │
+    │   │   ├───gold
+    │   │   │       .gitkeep
+    │   │   │
+    │   │   └───silver
+    │   │           .gitkeep
+    │   │
+    │   ├───etl_jobs
+    │   │       .gitkeep
+    │   │
+    │   ├───infrastructure
+    │   │       00_create_databases.sql
+    │   │       01_create_schemas.sql
+    │   │
+    │   ├───oltp_exploration
+    │   │       .gitkeep
+    │   │       ERD.md
+    │   │       RowCount Growth.sql
+    │   │       Sales_Domain_Mapping.md
+    │   │       Schema_Discovery_Query.sql
+    │   │       top_15_table_sizes.sql
+    │   │
+    │   ├───pipelines
+    │   │       .gitkeep
+    │   │
+    │   └───staging
+    │       │   .gitkeep
+    │       │
+    │       ├───extract
+    │       │       usp_oltp_extract_salesperson.sql
+    │       │
+    │       └───load
+    │               01 - CREATE TABLE Sales.SalesOrderHeader.sql
+    │               02 - CREATE TABLE Sales.SalesOrderDetail.sql
+    │               03 - CREATE TABLE Sales.Customer.sql
+    │               04 - CREATE TABLE Person.Person.sql
+    │               05- CREATE TABLE Person.Address.sql
+    │               06 - CREATE TABLE Production.Product.sql
+    │               07 - CREATE TABLE Sales.SalesPerson.sql
+    │
+    └───test
+            .gitkeep```
 
 
 
