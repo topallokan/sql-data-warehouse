@@ -78,7 +78,7 @@ src/
 ├── pipelines/ # Orchestration placeholders (ADF / Airflow)
 └── test/ # Validation, unit, integration, regression tests
 
-README.md
+
 
 ## 📘 Additional Documentation
 
