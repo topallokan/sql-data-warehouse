@@ -1,7 +1,7 @@
 USE AdventureWorks_STG
 GO
 CREATE TABLE Sales.SalesOrderHeader (
-    SalesOrderID               INT              NOT NULL,
+    SalesOrderID               INT               NOT NULL,
     RevisionNumber              TINYINT          NOT NULL,
     OrderDate                   DATETIME         NOT NULL,
     DueDate                     DATETIME         NOT NULL,
