@@ -87,23 +87,46 @@ The solution follows a layered warehouse architecture:
 │           load-strategy.md
 │           Source System Profiling.pbix
 │           Source System Profiling.png
+│           Staging_Data_Lineage.md
 │
 ├───src
 │   ├───dq
 │   │       .gitkeep
 │   │       dq.usp_ProfileTable.sql
+│   │       rowcount_validation.sql
 │   │
 │   ├───dwh
 │   │   │   .gitkeep
 │   │   │
 │   │   ├───bronze
 │   │   │       .gitkeep
+│   │   │       01 - CREATE TABLE Bronze.SalesOrderHeader.sql
+│   │   │       02 - CREATE TABLE Bronze.SalesOrderDetail.sql
+│   │   │       03 - CREATE TABLE Bronze.Customer.sql
+│   │   │       04 - CREATE TABLE Bronze.Person.sql
+│   │   │       05 - CREATE TABLE Bronze.Address.sql
+│   │   │       06 - CREATE TABLE Bronze.Product.sql
+│   │   │       07 - CREATE TABLE Bronze.SalesPerson.sql
 │   │   │
 │   │   ├───gold
 │   │   │       .gitkeep
+│   │   │       01 - CREATE TABLE Gold.FactSalesOrderHeader.sql
+│   │   │       02 - CREATE TABLE Gold.FactSalesOrderDetail.sql
+│   │   │       03 - CREATE TABLE Gold.DimCustomer.sql
+│   │   │       04 - CREATE TABLE Gold.DimPerson.sql
+│   │   │       05 - CREATE TABLE Gold.DimAddress.sql
+│   │   │       06 - CREATE TABLE Gold.DimProduct.sql
+│   │   │       07 - CREATE TABLE Gold.DimSalesPerson.sql
 │   │   │
 │   │   └───silver
 │   │           .gitkeep
+│   │           01 - CREATE TABLE Silver.SalesOrderHeader.sql
+│   │           02 - CREATE TABLE Silver.SalesOrderDetail.sql
+│   │           03 - CREATE TABLE Silver.Customer.sql
+│   │           04 - CREATE TABLE Silver.Person.sql
+│   │           05 - CREATE TABLE Silver.Address.sql
+│   │           06 - CREATE TABLE Silver.Product.sql
+│   │           07 - CREATE TABLE Silver.SalesPerson.sql
 │   │
 │   ├───etl_jobs
 │   │       .gitkeep
@@ -125,9 +148,16 @@ The solution follows a layered warehouse architecture:
 │   │
 │   └───staging
 │       │   .gitkeep
+│       │   CREATE TABLE Etl.AuditInfo.sql
 │       │
 │       ├───extract
-│       │       usp_oltp_extract_salesperson.sql
+│       │       01 - usp_oltp_extract_sales.salesorderheader.sql
+│       │       02 - usp_oltp_extract_sales.salesorderdetail.sql
+│       │       03 - usp_oltp_extract_sales.customer.sql
+│       │       04 - usp_oltp_extract_sales.salesperson.sql
+│       │       05 - usp_oltp_extract_person.address.sql
+│       │       06 - usp_oltp_extract_production.product.sql
+│       │       07 - usp_oltp_extract_person.person.sql
 │       │
 │       └───load
 │               01 - CREATE TABLE Sales.SalesOrderHeader.sql
