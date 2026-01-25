@@ -1,4 +1,4 @@
-USE [AdventureWorks_STG]
+USE [AdventureWorks_DWH]
 GO
 
 CREATE TABLE Etl.AuditInfo
@@ -11,6 +11,11 @@ CREATE TABLE Etl.AuditInfo
     Error_Message VARCHAR(4000) NULL,
 
     CONSTRAINT PK_AuditInfo
-        PRIMARY KEY CLUSTERED (audit_id)
+        PRIMARY KEY CLUSTERED (AuditId)
 )
+
+GO
+
+
+
 
