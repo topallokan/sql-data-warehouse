@@ -27,7 +27,7 @@ CREATE TABLE Silver.SalesOrderHeader (
     TotalDue                   DECIMAL(18,2)     NOT NULL,
     Comment                    NVARCHAR(256)     NULL,
     ModifiedDate               DATETIME          NOT NULL,
-    DWH_LoadDatetime           DATETIME2(0)      NOT NULL DEFAULT GETDATE(),
+    DWH_LoadDatetime           DATETIME2(7)      NOT NULL DEFAULT GETDATE(),
     DWH_AuditId                INT               NOT NULL,
     CONSTRAINT PK_Silver_SalesOrderHeader PRIMARY KEY (SalesOrderID)
 );

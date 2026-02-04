@@ -38,6 +38,7 @@ BEGIN
         ,CAST(SellStartDate AS DATE) AS SellStartDate
         ,CAST(SellEndDate AS DATE) AS SellEndDate
         ,CAST(DiscontinuedDate AS DATE) AS DiscontinuedDate
+        ,ModifiedDate
     FROM Bronze.Product;
 
 END

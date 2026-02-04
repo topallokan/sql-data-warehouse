@@ -26,7 +26,7 @@ CREATE TABLE Silver.Product (
     SellEndDate                 DATE                NULL,
     DiscontinuedDate            DATE                NULL,
     ModifiedDate                DATETIME            NOT NULL,
-    DWH_LoadDatetime            DATETIME2(0)        NOT NULL DEFAULT GETDATE(),
+    DWH_LoadDatetime            DATETIME2(7)        NOT NULL DEFAULT GETDATE(),
     DWH_AuditId                 INT                 NOT NULL,
     CONSTRAINT PK_Silver_Product PRIMARY KEY (ProductID)
 )

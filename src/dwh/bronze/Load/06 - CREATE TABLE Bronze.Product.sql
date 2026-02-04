@@ -25,6 +25,7 @@ CREATE TABLE Bronze.Product (
     SellStartDate               DATETIME            NOT NULL,
     SellEndDate                 DATETIME            NULL,
     DiscontinuedDate            DATETIME            NULL,
+    ModifiedDate                DATETIME            NULL,
     LoadDatetime DATETIME2(3) NOT NULL,
     AuditId      INT          NOT NULL
 )

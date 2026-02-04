@@ -12,7 +12,7 @@ CREATE TABLE Silver.Person (
     Suffix                  NVARCHAR(20)        NULL,
     EmailPromotion          INT                 NOT NULL,
     ModifiedDate            DATETIME            NOT NULL,
-    DWH_LoadDatetime        DATETIME2(0)        NOT NULL DEFAULT GETDATE(),
+    DWH_LoadDatetime        DATETIME2(7)        NOT NULL DEFAULT GETDATE(),
     DWH_AuditId             INT                 NOT NULL,
     CONSTRAINT PK_Silver_Person PRIMARY KEY (BusinessEntityID)
 );
