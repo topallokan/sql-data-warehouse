@@ -264,7 +264,6 @@ The solution follows a layered warehouse architecture:
 |
 \---test
         .gitkeep
-
 ```
 
 ## 📘 Additional Documentation
