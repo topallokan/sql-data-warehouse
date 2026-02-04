@@ -1,0 +1,1228 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/22/2025 3:06:26 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-RQ4O689"
+  DTS:CreatorName="DESKTOP-RQ4O689\Okan"
+  DTS:DTSID="{14935803-D220-40B3-80B9-0D0FA2A126CF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1055"
+  DTS:ObjectName="STGtoDWHBronzePerson"
+  DTS:PackageType="5"
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{216CC367-8A67-48FE-A585-F4FC002A9F88}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6CA32DF1-4430-4E81-8CE1-86FCA88F209D}"
+      DTS:ObjectName="DWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=AdventureWorks_DWH;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-STGtoDWHBronzePerson-{6CA32DF1-4430-4E81-8CE1-86FCA88F209D}localhost\SQLEXPRESS;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLTP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F7770F39-63B9-4486-AC64-A5B202A12565}"
+      DTS:ObjectName="OLTP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=AdventureWorks_OLTP;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-OLTPtoSTGSalesSalesPerson-{F7770F39-63B9-4486-AC64-A5B202A12565}localhost\SQLEXPRESS;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[STG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8783AC16-B355-4477-B76D-1EBF9FE81EDF}"
+      DTS:ObjectName="STG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=AdventureWorks_STG;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-OLTPtoSTGSalesSalesPerson-{8783AC16-B355-4477-B76D-1EBF9FE81EDF}localhost\SQLEXPRESS.AdventureWorks_STG;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{53E6165E-BD4C-4A59-8F83-347B75506E2E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditId">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Audit Finish"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A1D15399-B0F3-4B08-B42B-872C9B5FB728}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit Finish"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6CA32DF1-4430-4E81-8CE1-86FCA88F209D}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="UPDATE [Etl].[AuditInfo]&#xA;SET &#xA;    EndTime = SYSDATETIME(),&#xA;    Status = 'Success'&#xA;WHERE AuditId = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::AuditId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Audit Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D18E4B6C-2D48-4567-B555-9E2DFD8C53DB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6CA32DF1-4430-4E81-8CE1-86FCA88F209D}"
+          SQLTask:SqlStatementSource="INSERT INTO Etl.AuditInfo&#xA;(&#xA;    PackageName,&#xA;    StartTime,&#xA;    Status&#xA;)&#xA;VALUES&#xA;(&#xA;    ?,&#xA;    SYSDATETIME(),&#xA;    'Running'&#xA;);&#xA;&#xA;SELECT SCOPE_IDENTITY() AS AuditId&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditId"
+            SQLTask:DtsVariableName="User::AuditId" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DfLoadBronzePerson"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FE1002DB-88B3-4BD5-B17A-8941A5882CC3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DfLoadBronzePerson"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DfLoadBronzePerson\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DfLoadBronzePerson\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DfLoadBronzePerson\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output].Columns[AuditId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output].Columns[AuditId]"
+                      name="AuditId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::AuditId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::AuditId]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output].Columns[LoadDatetime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output].Columns[LoadDatetime]"
+                      name="LoadDatetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DfLoadBronzePerson\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DfLoadBronzePerson\DstDwhBronzePerson"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DstDwhBronzePerson"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[bronze].[Person]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1254</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[AuditId]"
+                      cachedDataType="i8"
+                      cachedName="AuditId"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[AuditId]"
+                      lineageId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output].Columns[AuditId]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[LoadDatetime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LoadDatetime"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[LoadDatetime]"
+                      lineageId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output].Columns[LoadDatetime]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[RowGuid]"
+                      cachedDataType="guid"
+                      cachedName="RowGuid"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[RowGuid]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[RowGuid]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[BusinessEntityID]"
+                      cachedDataType="i4"
+                      cachedName="BusinessEntityID"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[BusinessEntityID]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[PersonType]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="PersonType"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[PersonType]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[PersonType]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[NameStyle]"
+                      cachedDataType="bool"
+                      cachedName="NameStyle"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[NameStyle]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[NameStyle]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="16"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[MiddleName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="MiddleName"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[MiddleName]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[MiddleName]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[Suffix]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Suffix"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[Suffix]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Suffix]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[EmailPromotion]"
+                      cachedDataType="i4"
+                      cachedName="EmailPromotion"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[EmailPromotion]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[EmailPromotion]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[AdditionalContactInfo]"
+                      cachedDataType="nText"
+                      cachedName="AdditionalContactInfo"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[AdditionalContactInfo]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[AdditionalContactInfo]" />
+                    <inputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].Columns[Demographics]"
+                      cachedDataType="nText"
+                      cachedName="Demographics"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[Demographics]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Demographics]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[LoadDatetime]"
+                      dataType="dbTimeStamp2"
+                      name="LoadDatetime"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[AuditId]"
+                      dataType="i4"
+                      name="AuditId" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[RowGuid]"
+                      dataType="guid"
+                      name="RowGuid" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[PersonType]"
+                      dataType="wstr"
+                      length="2"
+                      name="PersonType" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[NameStyle]"
+                      dataType="bool"
+                      name="NameStyle" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="16"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[MiddleName]"
+                      dataType="wstr"
+                      length="100"
+                      name="MiddleName" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[Suffix]"
+                      dataType="wstr"
+                      length="20"
+                      name="Suffix" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[EmailPromotion]"
+                      dataType="i4"
+                      name="EmailPromotion" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[AdditionalContactInfo]"
+                      dataType="nText"
+                      name="AdditionalContactInfo" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input].ExternalColumns[Demographics]"
+                      dataType="nText"
+                      name="Demographics" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DfLoadBronzePerson\SrcStgBronzePerson"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SrcStgBronzePerson"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC Person.usp_Extract_BronzePerson</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1254</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[STG]"
+                  connectionManagerRefId="Package.ConnectionManagers[STG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[BusinessEntityID]"
+                      name="BusinessEntityID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[PersonType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[PersonType]"
+                      length="2"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[PersonType]"
+                      name="PersonType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[NameStyle]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[NameStyle]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[NameStyle]"
+                      name="NameStyle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      length="16"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="100"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[MiddleName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[MiddleName]"
+                      length="100"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[MiddleName]"
+                      name="MiddleName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="100"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Suffix]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[Suffix]"
+                      length="20"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Suffix]"
+                      name="Suffix"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[EmailPromotion]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[EmailPromotion]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[EmailPromotion]"
+                      name="EmailPromotion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[AdditionalContactInfo]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[AdditionalContactInfo]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[AdditionalContactInfo]"
+                      name="AdditionalContactInfo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Demographics]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[Demographics]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[Demographics]"
+                      name="Demographics"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[RowGuid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[RowGuid]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[RowGuid]"
+                      name="RowGuid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[BRZ_LoadDatetime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[BRZ_LoadDatetime]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[BRZ_LoadDatetime]"
+                      name="BRZ_LoadDatetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[BRZ_AuditId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[BRZ_AuditId]"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].Columns[BRZ_AuditId]"
+                      name="BRZ_AuditId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[PersonType]"
+                      dataType="wstr"
+                      length="2"
+                      name="PersonType" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[NameStyle]"
+                      dataType="bool"
+                      name="NameStyle" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="16"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[MiddleName]"
+                      dataType="wstr"
+                      length="100"
+                      name="MiddleName" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[Suffix]"
+                      dataType="wstr"
+                      length="20"
+                      name="Suffix" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[EmailPromotion]"
+                      dataType="i4"
+                      name="EmailPromotion" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[AdditionalContactInfo]"
+                      dataType="nText"
+                      name="AdditionalContactInfo" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[Demographics]"
+                      dataType="nText"
+                      name="Demographics" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[RowGuid]"
+                      dataType="guid"
+                      name="RowGuid" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[BRZ_LoadDatetime]"
+                      dataType="dbTimeStamp"
+                      name="BRZ_LoadDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output].ExternalColumns[BRZ_AuditId]"
+                      dataType="i4"
+                      name="BRZ_AuditId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[BusinessEntityID]"
+                      name="BusinessEntityID" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[PersonType]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[PersonType]"
+                      name="PersonType" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[NameStyle]"
+                      dataType="bool"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[NameStyle]"
+                      name="NameStyle" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      dataType="wstr"
+                      length="16"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[MiddleName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[MiddleName]"
+                      name="MiddleName" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[Suffix]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[Suffix]"
+                      name="Suffix" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[EmailPromotion]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[EmailPromotion]"
+                      name="EmailPromotion" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[AdditionalContactInfo]"
+                      dataType="nText"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[AdditionalContactInfo]"
+                      name="AdditionalContactInfo" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[Demographics]"
+                      dataType="nText"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[Demographics]"
+                      name="Demographics" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[RowGuid]"
+                      dataType="guid"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[RowGuid]"
+                      name="RowGuid" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[BRZ_LoadDatetime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[BRZ_LoadDatetime]"
+                      name="BRZ_LoadDatetime" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[BRZ_AuditId]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[BRZ_AuditId]"
+                      name="BRZ_AuditId" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DfLoadBronzePerson.Paths[Derived Column Output]"
+              endId="Package\DfLoadBronzePerson\DstDwhBronzePerson.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DfLoadBronzePerson\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DfLoadBronzePerson.Paths[OLE DB Source Output]"
+              endId="Package\DfLoadBronzePerson\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DfLoadBronzePerson\SrcStgBronzePerson.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SqlTruncateDwhBronzePerson"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AF0D9DEE-EFB0-4329-9893-E8509CBAC8BF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SqlTruncateDwhBronzePerson"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6CA32DF1-4430-4E81-8CE1-86FCA88F209D}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Bronze.Person" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EA082ADA-9046-4072-8EC2-FA7AC9B6D0F1}"
+      DTS:From="Package\SqlTruncateDwhBronzePerson"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DfLoadBronzePerson" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{57D1002C-A894-48D3-979B-3EDC6DFCFE04}"
+      DTS:From="Package\Audit Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SqlTruncateDwhBronzePerson" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{24C0E99B-F552-4804-BCD1-F1C6AEECACF6}"
+      DTS:From="Package\DfLoadBronzePerson"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Audit Finish" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{C646DBF1-0182-4790-A757-14B8F7DAC237}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{DF67B003-D853-4A7C-975B-0453F0DD4EB3}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Audit Fail"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2D834B76-5096-4982-9BAF-4C83E865665A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Audit Fail"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8783AC16-B355-4477-B76D-1EBF9FE81EDF}"
+              SQLTask:SqlStatementSource="UPDATE [Etl].[AuditInfo]&#xA;SET &#xA;    EndTime = SYSDATETIME(),&#xA;    Status = 'Fail',&#xA;    Error_Message = ?&#xA;WHERE AuditId = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::AuditId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="240,42.6666666666667"
+          Id="Package\Audit Finish"
+          TopLeft="57.4999974295497,318.877190608507" />
+        <NodeLayout
+          Size="234.666666666667,42.6666666666667"
+          Id="Package\Audit Start"
+          TopLeft="57.4999974295497,32.1929832299272" />
+        <NodeLayout
+          Size="181.333333333334,42.6666666666667"
+          Id="Package\DfLoadBronzePerson"
+          TopLeft="63.1249971780926,216.21052394184" />
+        <NodeLayout
+          Size="226.666666666667,42.6666666666667"
+          Id="Package\SqlTruncateDwhBronzePerson"
+          TopLeft="57.4999974295497,121.105261828183" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="170.833330762883,163.77192849485">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-17.0416669181238,52.4385954469903"
+              Start="0,0"
+              End="-17.0416669181238,44.9385954469903">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.2192977234952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.2192977234952"
+                    Point2="0,26.2192977234952"
+                    Point3="-4,26.2192977234952" />
+                  <mssgle:LineSegment
+                    End="-13.0416669181238,26.2192977234952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-13.0416669181238,26.2192977234952"
+                    Point2="-17.0416669181238,26.2192977234952"
+                    Point3="-17.0416669181238,30.2192977234952" />
+                  <mssgle:LineSegment
+                    End="-17.0416669181238,44.9385954469903" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="172.833330762883,74.8596498965939">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.2456119315891"
+              Start="0,0"
+              End="0,38.7456119315891">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.7456119315891" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="153.791663844759,258.877190608507">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.7083335847904,60.0000000000003"
+              Start="0,0"
+              End="23.7083335847904,52.5000000000003">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.0000000000002" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.0000000000002"
+                    Point2="0,30.0000000000002"
+                    Point3="4,30.0000000000002" />
+                  <mssgle:LineSegment
+                    End="19.7083335847904,30.0000000000002" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.7083335847904,30.0000000000002"
+                    Point2="23.7083335847904,30.0000000000002"
+                    Point3="23.7083335847904,34.0000000000002" />
+                  <mssgle:LineSegment
+                    End="23.7083335847904,52.5000000000003" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="124,42.6666666666667"
+          Id="Package.EventHandlers[OnError]\Audit Fail"
+          TopLeft="229.999993145466,133.999996006489" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\DfLoadBronzePerson">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\DfLoadBronzePerson\SrcStgBronzePerson"
+          TopLeft="138.749993797392,45.1578942410174" />
+        <NodeLayout
+          Size="208.666666666667,42.6666666666667"
+          Id="Package\DfLoadBronzePerson\Derived Column"
+          TopLeft="135.62499393709,127.315788624772" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\DfLoadBronzePerson\DstDwhBronzePerson"
+          TopLeft="138.124993825332,234.684207949529" />
+        <EdgeLayout
+          Id="Package\DfLoadBronzePerson.Paths[OLE DB Source Output]"
+          TopLeft="228.083327130725,87.8245609076841">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.875000139698,39.4912277170879"
+              Start="0,0"
+              End="11.875000139698,31.9912277170879">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.745613858544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.745613858544"
+                    Point2="0,19.745613858544"
+                    Point3="4,19.745613858544" />
+                  <mssgle:LineSegment
+                    End="7.87500013969805,19.745613858544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.87500013969805,19.745613858544"
+                    Point2="11.875000139698,19.745613858544"
+                    Point3="11.875000139698,23.745613858544" />
+                  <mssgle:LineSegment
+                    End="11.875000139698,31.9912277170879" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DfLoadBronzePerson.Paths[Derived Column Output]"
+          TopLeft="239.958327270423,169.982455291439">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.83333344509134,64.7017526580903"
+              Start="0,0"
+              End="-9.83333344509134,57.2017526580903">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.3508763290452" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.3508763290452"
+                    Point2="0,32.3508763290452"
+                    Point3="-4,32.3508763290452" />
+                  <mssgle:LineSegment
+                    End="-5.83333344509134,32.3508763290452" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.83333344509134,32.3508763290452"
+                    Point2="-9.83333344509134,32.3508763290452"
+                    Point3="-9.83333344509134,36.3508763290452" />
+                  <mssgle:LineSegment
+                    End="-9.83333344509134,57.2017526580903" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DfLoadBronzePerson\SrcStgBronzePerson">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DfLoadBronzePerson\DstDwhBronzePerson">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
