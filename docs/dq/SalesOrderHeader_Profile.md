@@ -1,0 +1,65 @@
+
+## Profiling Results
+
+| MetricName       | ColumnName                | Value       |
+|------------------|---------------------------|-------------|
+| RowCount         | NULL                      | 31465       |
+| NullPK           | NULL                      | 0           |
+| DuplicatePK      | NULL                      | 0           |
+| NullCount        | SalesOrderID              | 0           |
+| NullCount        | RevisionNumber            | 0           |
+| NullCount        | OrderDate                 | 0           |
+| NullCount        | DueDate                   | 0           |
+| NullCount        | ShipDate                  | 0           |
+| NullCount        | Status                    | 0           |
+| NullCount        | OnlineOrderFlag           | 0           |
+| NullCount        | SalesOrderNumber          | 0           |
+| NullCount        | PurchaseOrderNumber       | 27659       |
+| NullCount        | AccountNumber             | 0           |
+| NullCount        | CustomerID                | 0           |
+| NullCount        | SalesPersonID             | 27659       |
+| NullCount        | TerritoryID               | 0           |
+| NullCount        | BillToAddressID           | 0           |
+| NullCount        | ShipToAddressID           | 0           |
+| NullCount        | ShipMethodID              | 0           |
+| NullCount        | CreditCardID              | 1131        |
+| NullCount        | CreditCardApprovalCode    | 1131        |
+| NullCount        | CurrencyRateID            | 17489       |
+| NullCount        | SubTotal                  | 0           |
+| NullCount        | TaxAmt                    | 0           |
+| NullCount        | Freight                   | 0           |
+| NullCount        | TotalDue                  | 0           |
+| NullCount        | Comment                   | 31465       |
+| NullCount        | rowguid                   | 0           |
+| NullCount        | ModifiedDate              | 0           |
+| Min              | SalesOrderID              | 43659       |
+| Max              | SalesOrderID              | 75123       |
+| Min              | RevisionNumber            | 8           |
+| Max              | RevisionNumber            | 9           |
+| Min              | Status                    | 5           |
+| Max              | Status                    | 5           |
+| Min              | CustomerID                | 11000       |
+| Max              | CustomerID                | 30118       |
+| Min              | SalesPersonID             | 274         |
+| Max              | SalesPersonID             | 290         |
+| Min              | TerritoryID               | 1           |
+| Max              | TerritoryID               | 10          |
+| Min              | BillToAddressID           | 405         |
+| Max              | BillToAddressID           | 29883       |
+| Min              | ShipToAddressID           | 9           |
+| Max              | ShipToAddressID           | 29883       |
+| Min              | ShipMethodID              | 1           |
+| Max              | ShipMethodID              | 5           |
+| Min              | CreditCardID              | 1           |
+| Max              | CreditCardID              | 19237       |
+| Min              | CurrencyRateID            | 2           |
+| Max              | CurrencyRateID            | 12431       |
+| Min              | SubTotal                  | 1.37        |
+| Max              | SubTotal                  | 163930.39   |
+| Min              | TaxAmt                    | 0.11        |
+| Max              | TaxAmt                    | 17948.52    |
+| Min              | Freight                   | 0.03        |
+| Max              | Freight                   | 5608.91     |
+| Min              | TotalDue                  | 1.52        |
+| Max              | TotalDue                  | 187487.83   |
+
