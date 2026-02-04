@@ -57,121 +57,214 @@ The solution follows a layered warehouse architecture:
 ## 📂 Project Repository
 
 ```text 
-│   LICENSE
-│   README.md
-│
-├───config
-│       .gitkeep
-│
-├───docs
-│   ├───architecture
-│   │       .gitkeep
-│   │       NamingStandards.md
-│   │
-│   ├───dq
-│   │       .gitkeep
-│   │       DataQuality_Rules.md
-│   │       SalesOrderHeader_Profile.md
-│   │       SalesOrderHeader_Profile.xlsx
-│   │
-│   ├───modeling
-│   │       .gitkeep
-│   │       dimensions and fact scope.md
-│   │       Logical_Star_Schema.md
-│   │
-│   ├───project-overview
-│   │       Business_Entities_and_Domains.md
-│   │
-│   └───source-analysis
-│           .gitkeep
-│           load-strategy.md
-│           Source System Profiling.pbix
-│           Source System Profiling.png
-│           Staging_Data_Lineage.md
-│
-├───src
-│   ├───dq
-│   │       .gitkeep
-│   │       dq.usp_ProfileTable.sql
-│   │       rowcount_validation.sql
-│   │
-│   ├───dwh
-│   │   │   .gitkeep
-│   │   │
-│   │   ├───bronze
-│   │   │       .gitkeep
-│   │   │       01 - CREATE TABLE Bronze.SalesOrderHeader.sql
-│   │   │       02 - CREATE TABLE Bronze.SalesOrderDetail.sql
-│   │   │       03 - CREATE TABLE Bronze.Customer.sql
-│   │   │       04 - CREATE TABLE Bronze.Person.sql
-│   │   │       05 - CREATE TABLE Bronze.Address.sql
-│   │   │       06 - CREATE TABLE Bronze.Product.sql
-│   │   │       07 - CREATE TABLE Bronze.SalesPerson.sql
-│   │   │
-│   │   ├───gold
-│   │   │       .gitkeep
-│   │   │       01 - CREATE TABLE Gold.FactSalesOrderHeader.sql
-│   │   │       02 - CREATE TABLE Gold.FactSalesOrderDetail.sql
-│   │   │       03 - CREATE TABLE Gold.DimCustomer.sql
-│   │   │       04 - CREATE TABLE Gold.DimPerson.sql
-│   │   │       05 - CREATE TABLE Gold.DimAddress.sql
-│   │   │       06 - CREATE TABLE Gold.DimProduct.sql
-│   │   │       07 - CREATE TABLE Gold.DimSalesPerson.sql
-│   │   │
-│   │   └───silver
-│   │           .gitkeep
-│   │           01 - CREATE TABLE Silver.SalesOrderHeader.sql
-│   │           02 - CREATE TABLE Silver.SalesOrderDetail.sql
-│   │           03 - CREATE TABLE Silver.Customer.sql
-│   │           04 - CREATE TABLE Silver.Person.sql
-│   │           05 - CREATE TABLE Silver.Address.sql
-│   │           06 - CREATE TABLE Silver.Product.sql
-│   │           07 - CREATE TABLE Silver.SalesPerson.sql
-│   │
-│   ├───etl_jobs
-│   │       .gitkeep
-│   │
-│   ├───infrastructure
-│   │       00_create_databases.sql
-│   │       01_create_schemas.sql
-│   │
-│   ├───oltp_exploration
-│   │       .gitkeep
-│   │       ERD.md
-│   │       RowCount Growth.sql
-│   │       Sales_Domain_Mapping.md
-│   │       Schema_Discovery_Query.sql
-│   │       top_15_table_sizes.sql
-│   │
-│   ├───pipelines
-│   │       .gitkeep
-│   │
-│   └───staging
-│       │   .gitkeep
-│       │   CREATE TABLE Etl.AuditInfo.sql
-│       │
-│       ├───extract
-│       │       01 - usp_oltp_extract_sales.salesorderheader.sql
-│       │       02 - usp_oltp_extract_sales.salesorderdetail.sql
-│       │       03 - usp_oltp_extract_sales.customer.sql
-│       │       04 - usp_oltp_extract_sales.salesperson.sql
-│       │       05 - usp_oltp_extract_person.address.sql
-│       │       06 - usp_oltp_extract_production.product.sql
-│       │       07 - usp_oltp_extract_person.person.sql
-│       │
-│       └───load
-│               01 - CREATE TABLE Sales.SalesOrderHeader.sql
-│               02 - CREATE TABLE Sales.SalesOrderDetail.sql
-│               03 - CREATE TABLE Sales.Customer.sql
-│               04 - CREATE TABLE Person.Person.sql
-│               05 - CREATE TABLE Person.Address.sql
-│               06 - CREATE TABLE Production.Product.sql
-│               07 - CREATE TABLE Sales.SalesPerson.sql
-│
-└───test
-        .gitkeep
-
-```
+C:.
+|   .gitkeep
+|   LICENSE
+|   README.md
+|
++---config
+|       .gitkeep
+|
++---docs
+|   +---architecture
+|   |       .gitkeep
+|   |       NamingStandards.md
+|   |
+|   +---dq
+|   |       .gitkeep
+|   |       DataQuality_Rules.md
+|   |       SalesOrderHeader_Profile.md
+|   |       SalesOrderHeader_Profile.xlsx
+|   |
+|   +---modeling
+|   |       .gitkeep
+|   |       dimensions and fact scope.md
+|   |       Logical_Star_Schema.md
+|   |
+|   +---project-overview
+|   |       Business_Entities_and_Domains.md
+|   |
+|   \---source-analysis
+|           .gitkeep
+|           load-strategy.md
+|           Source System Profiling.pbix
+|           Source System Profiling.png
+|           Staging_Data_Lineage.md
+|
++---src
+|   +---dq
+|   |       .gitkeep
+|   |       dq.usp_ProfileTable.sql
+|   |       rowcount_validation.sql
+|   |
+|   +---dwh
+|   |   |   .gitkeep
+|   |   |   CREATE TABLE Etl.AuditInfo.sql
+|   |   |
+|   |   +---bronze
+|   |   |   |   .gitkeep
+|   |   |   |
+|   |   |   +---Extract
+|   |   |   |       01 - usp_stg_extract_Sales.Bronzesalesorderheader.sql
+|   |   |   |       02 - usp_stg_extract_Sales.Bronzesalesorderdetail.sql
+|   |   |   |       03 - usp_stg_extract_Sales.BronzeCustomer.sql
+|   |   |   |       04 - usp_stg_extract_Person.BronzePerson.sql
+|   |   |   |       05 - usp_stg_extract_Person.BronzeAddress.sql
+|   |   |   |       06 - usp_stg_extract_Product.BronzeProduct.sql
+|   |   |   |       07 - usp_stg_extract_Sales.BronzeSalesPerson.sql
+|   |   |   |
+|   |   |   \---Load
+|   |   |           01 - CREATE TABLE Bronze.SalesOrderHeader.sql
+|   |   |           02 - CREATE TABLE Bronze.SalesOrderDetail.sql
+|   |   |           03 - CREATE TABLE Bronze.Customer.sql
+|   |   |           04 - CREATE TABLE Bronze.Person.sql
+|   |   |           05 - CREATE TABLE Bronze.Address.sql
+|   |   |           06 - CREATE TABLE Bronze.Product.sql
+|   |   |           07 - CREATE TABLE Bronze.SalesPerson.sql
+|   |   |
+|   |   +---gold
+|   |   |   |   .gitkeep
+|   |   |   |   01 - execute sql task.sql
+|   |   |   |
+|   |   |   +---Extract
+|   |   |   |       01 - Silver.usp_Extract_Gold_FactSales.sql
+|   |   |   |
+|   |   |   \---Load
+|   |   |           01 - CREATE TABLE Gold.FactSales.sql
+|   |   |
+|   |   \---silver
+|   |       |   .gitkeep
+|   |       |
+|   |       +---Extract
+|   |       |       01 - Bronze.usp_Extract_Silver_SalesOrderHeader.sql
+|   |       |       02 - Bronze.usp_Extract_Silver_SalesOrderDetail.sql
+|   |       |       03 - Bronze.usp_Extract_Silver_Customer.sql
+|   |       |       04 - Bronze.usp_Extract_Silver_Person.sql
+|   |       |       05 - Bronze.usp_Extract_Silver_Address.sql
+|   |       |       06 - Bronze.usp_Extract_Silver_Product.sql
+|   |       |       07 - Bronze.usp_Extract_Silver_SalesPerson.sql
+|   |       |
+|   |       \---load
+|   |               01 - CREATE TABLE Silver.SalesOrderHeader.sql
+|   |               02 - CREATE TABLE Silver.SalesOrderDetail.sql
+|   |               03 - CREATE TABLE Silver.Customer.sql
+|   |               04 - CREATE TABLE Silver.Person.sql
+|   |               05 - CREATE TABLE Silver.Address.sql
+|   |               06 - CREATE TABLE Silver.Product.sql
+|   |               07 - CREATE TABLE Silver.SalesPerson.sql
+|   |
+|   +---etl_jobs
+|   |       .gitkeep
+|   |
+|   +---infrastructure
+|   |       00_create_databases.sql
+|   |       01_create_schemas.sql
+|   |
+|   +---oltp_exploration
+|   |       .gitkeep
+|   |       ERD.md
+|   |       RowCount Growth.sql
+|   |       Sales_Domain_Mapping.md
+|   |       Schema_Discovery_Query.sql
+|   |       top_15_table_sizes.sql
+|   |
+|   +---pipelines
+|   |   |   .gitignore
+|   |   |   .gitkeep
+|   |   |   AdventureWorksETL.sln
+|   |   |   LICENSE
+|   |   |   README.md
+|   |   |
+|   |   \---AdventureWorks
+|   |       |   AdventureWorks.database
+|   |       |   AdventureWorks.dtproj
+|   |       |   AdventureWorks.dtproj.user
+|   |       |   BRONZEtoSILVERAddress.dtsx
+|   |       |   BRONZEtoSILVERCustomer.dtsx
+|   |       |   BRONZEtoSILVERPerson.dtsx
+|   |       |   BRONZEtoSILVERProduct.dtsx
+|   |       |   BRONZEtoSILVERSalesOrderDetail.dtsx
+|   |       |   BRONZEtoSILVERSalesOrderHeader.dtsx
+|   |       |   BRONZEtoSILVERSalesPerson.dtsx
+|   |       |   OLTPtoSTGPersonAddress.dtsx
+|   |       |   OLTPtoSTGPersonPerson.dtsx
+|   |       |   OLTPtoSTGProductionProduct.dtsx
+|   |       |   OLTPtoSTGSalesSalesCustomer.dtsx
+|   |       |   OLTPtoSTGSalesSalesOrderDetail.dtsx
+|   |       |   OLTPtoSTGSalesSalesOrderHeader.dtsx
+|   |       |   OLTPtoSTGSalesSalesPerson.dtsx
+|   |       |   Project.params
+|   |       |   STGtoDWHBronzeAddress.dtsx
+|   |       |   STGtoDWHBronzeCustomer.dtsx
+|   |       |   STGtoDWHBronzePerson.dtsx
+|   |       |   STGtoDWHBronzeProduct.dtsx
+|   |       |   STGtoDWHBronzeSalesOrderDetail.dtsx
+|   |       |   STGtoDWHBronzeSalesOrderHeader.dtsx
+|   |       |   STGtoDWHBronzeSalesOrderHeaderdtsx
+|   |       |   STGtoDWHBronzeSalesPerson.dtsx
+|   |       |
+|   |       +---bin
+|   |       |   \---Development
+|   |       |           AdventureWorks.ispac
+|   |       |
+|   |       \---obj
+|   |           \---Development
+|   |                   AdventureWorks.dtproj
+|   |                   BRONZEtoSILVERAddress.dtsx
+|   |                   BRONZEtoSILVERCustomer.dtsx
+|   |                   BRONZEtoSILVERPerson.dtsx
+|   |                   BRONZEtoSILVERProduct.dtsx
+|   |                   BRONZEtoSILVERSalesOrderDetail.dtsx
+|   |                   BRONZEtoSILVERSalesOrderHeader.dtsx
+|   |                   BRONZEtoSILVERSalesPerson.dtsx
+|   |                   BuildLog.xml
+|   |                   OLTPtoSTGPersonAddress.dtsx
+|   |                   OLTPtoSTGPersonPerson.dtsx
+|   |                   OLTPtoSTGProductionProduct.dtsx
+|   |                   OLTPtoSTGSalesCustomer.dtsx
+|   |                   OLTPtoSTGSalesCustomer_.dtsx
+|   |                   OLTPtoSTGSalesSalesCustomer.dtsx
+|   |                   OLTPtoSTGSalesSalesOrderDetail.dtsx
+|   |                   OLTPtoSTGSalesSalesOrderHeader.dtsx
+|   |                   OLTPtoSTGSalesSalesPerson 2.dtsx
+|   |                   OLTPtoSTGSalesSalesPerson 3.dtsx
+|   |                   OLTPtoSTGSalesSalesPerson 4.dtsx
+|   |                   OLTPtoSTGSalesSalesPerson 5.dtsx
+|   |                   OLTPtoSTGSalesSalesPerson 6.dtsx
+|   |                   OLTPtoSTGSalesSalesPerson.dtsx
+|   |                   Project.params
+|   |                   STGtoDWHBronzeAddress.dtsx
+|   |                   STGtoDWHBronzeCustomer.dtsx
+|   |                   STGtoDWHBronzePerson.dtsx
+|   |                   STGtoDWHBronzeProduct.dtsx
+|   |                   STGtoDWHBronzeSalesOrderDetail.dtsx
+|   |                   STGtoDWHBronzeSalesOrderHeader.dtsx
+|   |                   STGtoDWHBronzeSalesPerson.dtsx
+|   |
+|   \---staging
+|       |   .gitkeep
+|       |   CREATE TABLE Etl.AuditInfo.sql
+|       |
+|       +---extract
+|       |       01 - usp_oltp_extract_sales.salesorderheader.sql
+|       |       02 - usp_oltp_extract_sales.salesorderdetail.sql
+|       |       03 - usp_oltp_extract_sales.customer.sql
+|       |       04 - usp_oltp_extract_sales.salesperson.sql
+|       |       05 - usp_oltp_extract_person.address.sql
+|       |       06 - usp_oltp_extract_production.product.sql
+|       |       07 - usp_oltp_extract_person.person.sql
+|       |
+|       \---load
+|               01 - CREATE TABLE Sales.SalesOrderHeader.sql
+|               02 - CREATE TABLE Sales.SalesOrderDetail.sql
+|               03 - CREATE TABLE Sales.Customer.sql
+|               04 - CREATE TABLE Person.Person.sql
+|               05 - CREATE TABLE Person.Address.sql
+|               06 - CREATE TABLE Production.Product.sql
+|               07 - CREATE TABLE Sales.SalesPerson.sql
+|
+\---test
+        .gitkeep```
 
 ## 📘 Additional Documentation
 
